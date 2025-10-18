@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('nav');
     const container = document.querySelector('.container');
-    const invitation = document.querySelector('.invitation');
-    const button = document.querySelector('.button');
 
     function adjustLayout() {
         const navHeight = nav.offsetHeight;
@@ -14,30 +12,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const body = document.body;
 
-    function createConfetti() {
-        // Clear existing confetti before creating new ones
-        const existingConfetti = document.querySelectorAll('.confetti');
-        existingConfetti.forEach(confetto => confetto.remove());
+    function fireConfetti() {
+        const end = Date.now() + (3 * 1000);
+        const colors = ['#bb0000', '#ffffff'];
 
-        for (let i = 0; i < 100; i++) {
-            const confetto = document.createElement('div');
-            confetto.classList.add('confetti');
-            confetto.style.left = Math.random() * 100 + 'vw';
-            confetto.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2-5 seconds
-            confetto.style.animationDelay = Math.random() * 2 + 's';
-            confetto.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-            body.appendChild(confetto);
+        (function frame() {
+            if (Date.now() > end) {
+                return;
+            }
+
+            confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: colors
+            });
+            confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: colors
+            });
+
+            requestAnimationFrame(frame);
+        }());
+    }
+
+    function createBalloons() {
+        const colors = ['#ffbe0b', '#fb5607', '#ff006e', '#8338ec', '#3a86ff'];
+        for (let i = 0; i < 15; i++) {
+            const balloonContainer = document.createElement('div');
+            balloonContainer.classList.add('balloon-container');
+            balloonContainer.style.left = Math.random() * 100 + 'vw';
+            balloonContainer.style.animationDuration = (Math.random() * 10 + 8) + 's'; // 8-18 seconds
+
+            const balloonBody = document.createElement('div');
+            balloonBody.classList.add('balloon-body');
+            balloonBody.style.backgroundColor = colors[i % colors.length];
+
+            const balloonString = document.createElement('div');
+            balloonString.classList.add('balloon-string');
+
+            balloonContainer.appendChild(balloonBody);
+            balloonContainer.appendChild(balloonString);
+            body.appendChild(balloonContainer);
         }
     }
 
-    let hoverTimeout;
     body.addEventListener('mouseenter', () => {
-        createConfetti();
-    });
-
-    body.addEventListener('mouseleave', () => {
-        // Optional: remove confetti when mouse leaves
-        const existingConfetti = document.querySelectorAll('.confetti');
-        existingConfetti.forEach(confetto => confetto.remove());
+        fireConfetti();
+        createBalloons();
     });
 });
+
