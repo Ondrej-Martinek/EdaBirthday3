@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&display=swap');
+
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Dancing Script', cursive;
+    background-color: #f0f0f0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.photo-container {
+    height: 100vh; /* Fallback for when JS is disabled */
+    overflow-y: auto; /* Vertical scrollbar if needed */
+    position: relative;
+}
+
+.photo-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 3em;
+    color: black;
+    text-align: center;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* Note: You may need to adjust the top/left/right values to best fit your image */
+
+.invitation {
+    font-family: Arial, sans-serif;
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.welcome {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #28a745;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.2em;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #218838;
+}
+
+footer {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.confetti {
+    position: fixed;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    animation: fall linear;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
